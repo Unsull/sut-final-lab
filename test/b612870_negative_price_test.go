@@ -10,9 +10,10 @@ import (
 )
 
 func ValidateNegativePrice(t *testing.T) {
-	g := NewGomWiht(t)
+	g := NewWithT(t)
 
-	g.Run("Price must be between 50 and 5000", func(t *testing.T) {
+	// price
+	t.Run("Price must be between 50 and 5000", func(t *testing.T) {
 		book := model.Books{
 			Title: "text",
 			Price: 5,
@@ -20,10 +21,9 @@ func ValidateNegativePrice(t *testing.T) {
 		}
 
 		ok, err := govalidator.ValidateStruct(book)
-		g.Expect(ok).To(BeFalse)
-		g.Expect(err).ToNot(BeNil)
+		g.Expect(ok).To(BeFalse())
+		g.Expect(err).ToNot(BeNil())
 		g.Expect(err.Error()).To(Equal("Price must be between 50 and 5000"))
 	})
 
-	g.Run()
 }
