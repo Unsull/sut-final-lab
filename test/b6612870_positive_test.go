@@ -10,18 +10,19 @@ import (
 )
 
 func Validate(t *testing.T) {
-	g := NewGomWiht(t)
+	g := NewWithT(t)
 
 	// all suc
-	g.Run("Corent to all", func(t *testing.T) {
+	t.Run("Corent to all", func(t *testing.T) {
 		book := model.Books{
 			Title: "text",
 			Price: 500,
-			Code:  "B6612870",
+			Code:  "BK1232456",
 		}
 
 		ok, err := govalidator.ValidateStruct(book)
-		g.Expect(ok).To(BeTrue)
-		g.Expect(err).To(BeNil)
+		g.Expect(ok).To(BeTrue())
+		g.Expect(err).To(BeNil())
 	})
+
 }
